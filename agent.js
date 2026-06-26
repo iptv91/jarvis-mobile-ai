@@ -1,1 +1,92 @@
-/**\n * 🤖 JARVIS - Updated Agent with Local NLP Engine\n * Tamamen Offline, API yok!\n */\n\nconst JarvisNLP = require(\"./nlp-engine\");\n\nclass JarvisAgent {\n  constructor() {\n    this.nlp = new JarvisNLP();\n    this.sessionActive = true;\n    console.log(\"🤖 JARVIS başlatılıyor...\");\n  }\n\n  /**\n   * Komutu işle ve cevap ver\n   */\n  async handleCommand(userInput) {\n    try {\n      const result = await this.nlp.process(userInput);\n      return result;\n    } catch (error) {\n      console.error(\"❌ Hata:\", error.message);\n      return {\n        command: { action: \"error\" },\n        result: \"Bir hata oluştu\",\n        response: \"Üzgünüm, bir hata oluştu. Lütfen tekrar dene.\",\n      };\n    }\n  }\n\n  /**\n   * Sesli komut desteği (Web Speech API)\n   */\n  async handleVoiceCommand(audioData) {\n    console.log(\"🎤 Sesli komut alındı\");\n    return await this.handleCommand(audioData);\n  }\n\n  /**\n   * Komut geçmişi\n   */\n  getHistory() {\n    return this.nlp.conversationHistory;\n  }\n\n  /**\n   * Mevcut telefon durumu\n   */\n  getPhoneState() {\n    return this.nlp.phoneState;\n  }\n}\n\n// Test Komutları\nasync function runDemo() {\n  const jarvis = new JarvisAgent();\n\n  const testCommands = [\n    \"Telefonumu kilitle\",\n    \"WhatsApp'ı aç\",\n    \"Pil seviyesi ne kadar\",\n    \"Ekran parlaklığını %80'e ayarla\",\n    \"Müzik çal\",\n    \"Saat 7'de alarm kur\",\n    \"Telefon durumunu söyle\",\n    \"WiFi'yı aç\",\n    \"Ses seviyesini %50'ye ayarla\",\n    \"Instagram'ı kapat\",\n  ];\n\n  console.log(\"\\n\" + \"=\".repeat(70));\n  console.log(\"🧪 JARVIS NLP ENGINE - TEST MODU\");\n  console.log(\"=\".repeat(70));\n\n  for (const command of testCommands) {\n    const result = await jarvis.handleCommand(command);\n    await new Promise((resolve) => setTimeout(resolve, 1000));\n  }\n\n  console.log(\"\\n\" + \"=\".repeat(70));\n  console.log(\"📱 SON TELEFON DURUMU:\");\n  console.log(JSON.stringify(jarvis.getPhoneState(), null, 2));\n  console.log(\"=\".repeat(70));\n}\n\n// Başlat\nif (require.main === module) {\n  runDemo().catch(console.error);\n}\n\nmodule.exports = { JarvisAgent };\n
+/**
+ * 🤖 JARVIS - Updated Agent with Local NLP Engine
+ * Tamamen Offline, API yok!
+ */
+
+const JarvisNLP = require("./nlp-engine");
+
+class JarvisAgent {
+  constructor() {
+    this.nlp = new JarvisNLP();
+    this.sessionActive = true;
+    console.log("🤖 JARVIS başlatılıyor...");
+  }
+
+  /**
+   * Komutu işle ve cevap ver
+   */
+  async handleCommand(userInput) {
+    try {
+      const result = await this.nlp.process(userInput);
+      return result;
+    } catch (error) {
+      console.error("❌ Hata:", error.message);
+      return {
+        command: { action: "error" },
+        result: "Bir hata oluştu",
+        response: "Üzgünüm, bir hata oluştu. Lütfen tekrar dene.",
+      };
+    }
+  }
+
+  /**
+   * Sesli komut desteği (Web Speech API)
+   */
+  async handleVoiceCommand(audioData) {
+    console.log("🎤 Sesli komut alındı");
+    return await this.handleCommand(audioData);
+  }
+
+  /**
+   * Komut geçmişi
+   */
+  getHistory() {
+    return this.nlp.conversationHistory;
+  }
+
+  /**
+   * Mevcut telefon durumu
+   */
+  getPhoneState() {
+    return this.nlp.phoneState;
+  }
+}
+
+// Test Komutları
+async function runDemo() {
+  const jarvis = new JarvisAgent();
+
+  const testCommands = [
+    "Telefonumu kilitle",
+    "WhatsApp'ı aç",
+    "Pil seviyesi ne kadar",
+    "Ekran parlaklığını %80'e ayarla",
+    "Müzik çal",
+    "Saat 7'de alarm kur",
+    "Telefon durumunu söyle",
+    "WiFi'yı aç",
+    "Ses seviyesini %50'ye ayarla",
+    "Instagram'ı kapat",
+  ];
+
+  console.log("\n" + "=".repeat(70));
+  console.log("🧪 JARVIS NLP ENGINE - TEST MODU");
+  console.log("=".repeat(70));
+
+  for (const command of testCommands) {
+    const result = await jarvis.handleCommand(command);
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+  }
+
+  console.log("\n" + "=".repeat(70));
+  console.log("📱 SON TELEFON DURUMU:");
+  console.log(JSON.stringify(jarvis.getPhoneState(), null, 2));
+  console.log("=".repeat(70));
+}
+
+// Başlat
+if (require.main === module) {
+  runDemo().catch(console.error);
+}
+
+module.exports = { JarvisAgent };
