@@ -4,13 +4,12 @@
 
 ### Adım 1: APK'yı İndir
 ```bash
-# APK dosyasını telefonunuza indirin
 jarvis-release.apk
 ```
 
 ### Adım 2: Bilinmeyen Kaynaklar'ı Etkinleştir
 1. **Ayarlar** → **Güvenlik**
-2. **Bilinmeyen Kaynaklar** → **Açın** ✅
+2. **Bilinmeyen Kaynaklar** → **Aç** ✅
 
 ### Adım 3: APK'yı Kur
 1. Dosya Yöneticisi'nde `jarvis-release.apk`'yi bulun
@@ -18,23 +17,21 @@ jarvis-release.apk
 3. **Kur** butonuna tıklayın
 
 ### Adım 4: İzinler
-1. Uygulamayı açın
-2. Gerekli izinleri verin:
-   - ✅ Telefon
-   - ✅ SMS
-   - ✅ Kamera
-   - ✅ Mikrofon
+Uygulamayı açın ve gerekli izinleri verin:
+- ✅ Telefon
+- ✅ SMS
+- ✅ Kamera
+- ✅ Mikrofon
+- ✅ Dosyalara Erişim
 
 ---
 
-## 💻 Bilgisayarda (Geliştirme)
+## 💻 Bilgisayarda Build
 
 ### Gereksinimler
 - Node.js 16+
-- Android SDK
-- Java 11+
-- Gradle 7+
-- 16GB RAM (minimum)
+- npm veya yarn
+- 16GB RAM
 - 30GB Boş Disk
 
 ### Kurulum
@@ -44,77 +41,33 @@ jarvis-release.apk
 git clone https://github.com/iptv91/jarvis-mobile-ai.git
 cd jarvis-mobile-ai
 
-# 2. Bağımlılıkları yükle
-npm install
+# 2. Setup script'i çalıştır
+bash build-setup.sh
 
-# 3. APK'yı derle
-bash build-apk.sh
-
-# 4. APK'yı telefonunuza gönderin
-# Android Studio Device File Explorer kullanabilir veya:
-adb push jarvis-release.apk /sdcard/Download/
+# 3. APK dosyası Al
+ls jarvis-release.apk
 ```
 
 ---
 
-## 🐳 Docker ile (En Kolay)
+## 🧪 Test Komutları
 
-```bash
-# 1. Docker image'ı build et
-docker build -t jarvis-builder .
-
-# 2. Container'ı çalıştır
-docker run --rm -v $(pwd)/output:/app/output jarvis-builder
-
-# 3. APK'yı al
-ls output/jarvis-release.apk
-```
-
----
-
-## 🧪 Test Etme
-
-### Komut Örnekleri
 ```
 "Telefonumu kilitle"
 "WhatsApp'ı aç"
-"Pil seviyesi kaç"
+"Pil seviyesi ne kadar"
 "Ekran parlaklığını %80'e ayarla"
 "Müzik çal"
 "Saat 7'de alarm kur"
 "Telefon durumunu söyle"
-```
-
----
-
-## ⚙️ Sorun Giderme
-
-### APK Kurulumu Başarısız
-```bash
-# Telefona manuel ADB ile yükle
-adb install -r jarvis-release.apk
-```
-
-### İzin Hatası
-```bash
-# İzinleri sıfırla
-adb shell pm reset-permissions
-```
-
-### APK Dosyası Yok
-```bash
-# Gradle cache'i temizle
-cd android
-./gradlew clean
-./gradlew assembleRelease
+"WiFi'yı aç"
+"Ses seviyesini %50'ye ayarla"
 ```
 
 ---
 
 ## 📞 Destek
-
-Sorun varsa:
-- GitHub Issues: https://github.com/iptv91/jarvis-mobile-ai/issues
+- GitHub: https://github.com/iptv91/jarvis-mobile-ai
 - Email: cruzgar188@gmail.com
 
 **Keyifli kullanımlar!** 🎉
