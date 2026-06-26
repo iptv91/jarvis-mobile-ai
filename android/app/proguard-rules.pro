@@ -1,0 +1,3 @@
+-keep class com.iptv91.jarvis.** { *; }
+-keepclassmembers class com.iptv91.jarvis.** { *; }
+-dontwarn com.iptv91.jarvis.**
