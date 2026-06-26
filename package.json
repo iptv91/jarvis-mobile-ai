@@ -1,23 +1,28 @@
 {
   "name": "jarvis-mobile-ai",
   "version": "1.0.0",
-  "description": "Jarvis - Claude AI tabanlı mobil kontrol sistemi",
+  "description": "Jarvis - Local NLP AI Mobil Telefon Kontrol Sistemi",
   "main": "agent.js",
+  "type": "module",
   "scripts": {
     "start": "node agent.js",
-    "dev": "nodemon agent.js",
-    "mobile": "npx react-native start"
+    "test": "node nlp-engine.js",
+    "build:apk": "bash build-release.sh",
+    "build": "npm run build:apk"
   },
+  "keywords": [
+    "AI",
+    "NLP",
+    "Jarvis",
+    "Mobile",
+    "Android",
+    "Türkçe",
+    "Offline"
+  ],
+  "author": "iptv91",
+  "license": "MIT",
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.24.0",
-    "react": "^18.3.0",
-    "react-native": "^0.76.0",
-    "@react-navigation/native": "^6.1.0",
-    "react-native-gesture-handler": "^2.18.0",
-    "react-native-reanimated": "^3.8.0",
-    "react-native-vector-icons": "^10.1.0",
-    "axios": "^1.6.0",
-    "expo": "^52.0.0"
+    "express": "^4.18.2"
   },
   "devDependencies": {
     "nodemon": "^3.1.0"
